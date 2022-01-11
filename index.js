@@ -945,7 +945,6 @@ client.on("messageCreate", async (message) => {
   if (message.content.toLowerCase() === `!updateset`) {
     const userNames = [];
     const gearSet = [];
-    const response = await axios.get();
     // response.data.forEach((entry) => userNames.push(entry.user));
     // console.log(userNames.includes(message.author.username))
     // if (userNames.includes(message.author.username === false)) {
@@ -962,11 +961,11 @@ client.on("messageCreate", async (message) => {
     //   return
     // }
 
-    response.data.forEach((entry) => {
-      if (message.author.username === entry.user) {
-        gearSet.push(entry);
-      }
-    });
+    // response.data.forEach((entry) => {
+    //   if (message.author.username === entry.user) {
+    //     gearSet.push(entry);
+    //   }
+    // });
     const reply = (msg) => {
       message.reply(msg);
     };
@@ -1146,6 +1145,8 @@ client.on("messageCreate", async (message) => {
             .then(reply({ content: statement }))
             .catch((err) => console.log(err));
         });
+      } else {
+        message.reply({ content: "You don't appear to have a set yet! Please type !setbis to get started!"})
       }
     });
   }
