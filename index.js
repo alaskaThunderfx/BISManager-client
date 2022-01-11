@@ -106,6 +106,8 @@ client.on("messageCreate", async (message) => {
 
             *${outro}*`;
             message.reply({ content: statement });
+          } else {
+            message.reply({ content: `You don't appear to have a set yet, ${message.author.username}! Please type !setbis to get started!`})
           }
         });
       } else {
@@ -1146,7 +1148,7 @@ client.on("messageCreate", async (message) => {
             .catch((err) => console.log(err));
         });
       } else {
-        message.reply({ content: "You don't appear to have a set yet! Please type !setbis to get started!"})
+        message.reply({ content: `You don't appear to have a set yet, ${message.author.username}! Please type !setbis to get started!`})
       }
     });
   }
