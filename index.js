@@ -43,13 +43,13 @@ client.on("messageCreate", async (message) => {
     const userNames = [];
     const gearSets = [];
     try {
-      const response = await axios.get("http://localhost:4741/users");
+      const response = await axios.get("https://dry-depths-80800.herokuapp.com/users");
       response.data.forEach((entry) => userNames.push(entry.user));
       if (userNames.includes(message.author.username)) {
         // message.reply({
         //   content: `Hey there, ${message.author.username}! Good to see you again!`,
         // });
-        const gearsets = await axios.get("http://localhost:4741/gearsets");
+        const gearsets = await axios.get("https://dry-depths-80800.herokuapp.com/gearsets");
         gearsets.data.forEach((entry) => {
           if (entry.user === message.author.username) {
             console.log(entry);
@@ -113,7 +113,7 @@ client.on("messageCreate", async (message) => {
           content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
         });
         axios
-          .post("http://localhost:4741/users", {
+          .post("https://dry-depths-80800.herokuapp.com/users", {
             user: message.author.username,
           })
           .then(console.log("okay"));
@@ -125,14 +125,14 @@ client.on("messageCreate", async (message) => {
 
   if (message.content.toLowerCase() === `!setbis`) {
     const userNames = [];
-    const response = await axios.get("http://localhost:4741/users");
+    const response = await axios.get("https://dry-depths-80800.herokuapp.com/users");
     response.data.forEach((entry) => userNames.push(entry.user));
     if (!userNames.includes(message.author.username)) {
       message.reply({
         content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
       });
       axios
-        .post("http://localhost:4741/users", {
+        .post("https://dry-depths-80800.herokuapp.com/users", {
           user: message.author.username,
         })
         .then(console.log("okay"));
@@ -932,7 +932,7 @@ client.on("messageCreate", async (message) => {
       }
       console.log(JSON.stringify(data));
       axios
-        .post("http://localhost:4741/gearsets", data, {
+        .post("https://dry-depths-80800.herokuapp.com/gearsets", data, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -953,7 +953,7 @@ client.on("messageCreate", async (message) => {
     //     content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
     //   });
     //   axios
-    //     .post("http://localhost:4741/users", {
+    //     .post("https://dry-depths-80800.herokuapp.com/users", {
     //       user: message.author.username,
     //     })
     //     .then(console.log('done'))
@@ -974,7 +974,7 @@ client.on("messageCreate", async (message) => {
     const currentUser = [];
 
     let userID;
-    const gearsets = await axios.get(`http://localhost:4741/gearsets/`);
+    const gearsets = await axios.get(`https://dry-depths-80800.herokuapp.com/gearsets/`);
     gearsets.data.forEach((entry) => {
       if (entry.user === message.author.username) {
         const data = {
@@ -1135,7 +1135,7 @@ client.on("messageCreate", async (message) => {
           ${ring1}`;
           axios
             .patch(
-              `http://localhost:4741/gearsets/${setId}`,
+              `https://dry-depths-80800.herokuapp.com/gearsets/${setId}`,
               JSON.stringify(data),
               {
                 headers: {
