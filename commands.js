@@ -3,7 +3,6 @@ const dataArrays = require("./dataArrays");
 
 const questions = dataArrays.questions;
 const jobs = dataArrays.jobs;
-const weapons = dataArrays.weapons
 const tanks = dataArrays.tanks
 const heals = dataArrays.heals
 const meleeMaiming = dataArrays.meleeMaiming;
@@ -11,6 +10,18 @@ const meleeStriking = dataArrays.meleeStriking;
 const meleeScouting = dataArrays.meleeScouting;
 const physRange = dataArrays.physRange;
 const magRange = dataArrays.magRange;
+const weapons = dataArrays.weapons
+const head = dataArrays.head
+const body = dataArrays.body
+const hands = dataArrays.hands
+const legs = dataArrays.legs
+const feet = dataArrays.feet
+const ears = dataArrays.ears
+const neck = dataArrays.neck
+const wrists = dataArrays.wrists
+const ring0 = dataArrays.ring0
+const ring1 = dataArrays.ring1
+const loot = dataArrays.loot
 
 module.exports = async function (message) {
   if (message.content.toLowerCase() === "!bismanager") {
@@ -199,75 +210,75 @@ module.exports = async function (message) {
         // Begin Head questions
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.head.Tank.tome}
-              2. ${dataArrays.head.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+              1. ${head.Tank.tome}
+              2. ${head.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.head.Heals.tome}
-              2. ${dataArrays.head.Heals.raid}`);
-        } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
+              1. ${head.Heals.tome}
+              2. ${head.Heals.raid}`);
+        } else if (meleeMaiming.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.head.Melee.Maiming.tome}
-              2. ${dataArrays.head.Melee.Maiming.raid}`);
-        } else if (dataArrays.meleeStriking.includes(data.job.toLowerCase())) {
+              1. ${head.Melee.Maiming.tome}
+              2. ${head.Melee.Maiming.raid}`);
+        } else if (meleeStriking.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.head.Melee.Striking.tome}
-              2. ${dataArrays.head.Melee.Striking.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+              1. ${head.Melee.Striking.tome}
+              2. ${head.Melee.Striking.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.head.Melee.Scouting.tome}
-              2. ${dataArrays.head.Melee.Scouting.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+              1. ${head.Melee.Scouting.tome}
+              2. ${head.Melee.Scouting.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.head.PhysRange.tome}
-              2. ${dataArrays.head.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+              1. ${head.PhysRange.tome}
+              2. ${head.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.head.MagRange.tome}
-              2. ${dataArrays.head.MagRange.raid}`);
+              1. ${head.MagRange.tome}
+              2. ${head.MagRange.raid}`);
         }
         // User selects Body
       } else if (counter === 3) {
         // Store Head choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.Heals.tome;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.Melee.Maiming.tome;
+            data.head.name = head.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.head.name = head.Heals.tome;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.head.name = head.Melee.Maiming.tome;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.head.name = dataArrays.head.Melee.Striking.tome;
+            data.head.name = head.Melee.Striking.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.head.name = dataArrays.head.Melee.Scouting.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.MagRange.tome;
+            data.head.name = head.Melee.Scouting.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.head.name = head.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.head.name = head.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.Heals.raid;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.Melee.Maiming.raid;
+            data.head.name = head.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.head.name = head.Heals.raid;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.head.name = head.Melee.Maiming.raid;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.head.name = dataArrays.head.Melee.Striking.raid;
+            data.head.name = head.Melee.Striking.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.head.name = dataArrays.head.Melee.Scouting.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.head.name = dataArrays.head.MagRange.raid;
+            data.head.name = head.Melee.Scouting.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.head.name = head.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.head.name = head.MagRange.raid;
           }
         }
         console.log(data);
@@ -275,75 +286,75 @@ module.exports = async function (message) {
         // Begin Body questions
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.body.Tank.tome}
-              2. ${dataArrays.body.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+              1. ${body.Tank.tome}
+              2. ${body.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.body.Heals.tome}
-              2. ${dataArrays.body.Heals.raid}`);
-        } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
+              1. ${body.Heals.tome}
+              2. ${body.Heals.raid}`);
+        } else if (meleeMaiming.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.body.Melee.Maiming.tome}
-              2. ${dataArrays.body.Melee.Maiming.raid}`);
-        } else if (dataArrays.meleeStriking.includes(data.job.toLowerCase())) {
+              1. ${body.Melee.Maiming.tome}
+              2. ${body.Melee.Maiming.raid}`);
+        } else if (meleeStriking.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.body.Melee.Striking.tome}
-              2. ${dataArrays.body.Melee.Striking.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+              1. ${body.Melee.Striking.tome}
+              2. ${body.Melee.Striking.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.body.Melee.Scouting.tome}
-              2. ${dataArrays.body.Melee.Scouting.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+              1. ${body.Melee.Scouting.tome}
+              2. ${body.Melee.Scouting.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.body.PhysRange.tome}
-              2. ${dataArrays.body.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+              1. ${body.PhysRange.tome}
+              2. ${body.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-              1. ${dataArrays.body.MagRange.tome}
-              2. ${dataArrays.body.MagRange.raid}`);
+              1. ${body.MagRange.tome}
+              2. ${body.MagRange.raid}`);
         }
         // User selects Hands
       } else if (counter === 4) {
         // Store Body choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.Heals.tome;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.Melee.Maiming.tome;
+            data.body.name = body.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.body.name = body.Heals.tome;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.body.name = body.Melee.Maiming.tome;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.body.name = dataArrays.body.Melee.Striking.tome;
+            data.body.name = body.Melee.Striking.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.body.name = dataArrays.body.Melee.Scouting.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.MagRange.tome;
+            data.body.name = body.Melee.Scouting.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.body.name = body.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.body.name = body.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.Heals.raid;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.Melee.Maiming.raid;
+            data.body.name = body.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.body.name = body.Heals.raid;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.body.name = body.Melee.Maiming.raid;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.body.name = dataArrays.body.Melee.Striking.raid;
+            data.body.name = body.Melee.Striking.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.body.name = dataArrays.body.Melee.Scouting.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.body.name = dataArrays.body.MagRange.raid;
+            data.body.name = body.Melee.Scouting.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.body.name = body.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.body.name = body.MagRange.raid;
           }
         }
         console.log(data);
@@ -351,74 +362,74 @@ module.exports = async function (message) {
         // Begin Hands questions
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.hands.Tank.tome}
-          2. ${dataArrays.hands.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${hands.Tank.tome}
+          2. ${hands.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.hands.Heals.tome}
-          2. ${dataArrays.hands.Heals.raid}`);
-        } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
+          1. ${hands.Heals.tome}
+          2. ${hands.Heals.raid}`);
+        } else if (meleeMaiming.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.hands.Melee.Maiming.tome}
-          2. ${dataArrays.hands.Melee.Maiming.raid}`);
-        } else if (dataArrays.meleeStriking.includes(data.job.toLowerCase())) {
+          1. ${hands.Melee.Maiming.tome}
+          2. ${hands.Melee.Maiming.raid}`);
+        } else if (meleeStriking.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.hands.Melee.Striking.tome}
-          2. ${dataArrays.hands.Melee.Striking.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${hands.Melee.Striking.tome}
+          2. ${hands.Melee.Striking.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.hands.Melee.Scouting.tome}
-          2. ${dataArrays.hands.Melee.Scouting.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${hands.Melee.Scouting.tome}
+          2. ${hands.Melee.Scouting.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.hands.PhysRange.tome}
-          2. ${dataArrays.hands.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${hands.PhysRange.tome}
+          2. ${hands.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.hands.MagRange.tome}
-          2. ${dataArrays.hands.MagRange.raid}`);
+          1. ${hands.MagRange.tome}
+          2. ${hands.MagRange.raid}`);
         }
       } else if (counter === 5) {
         // Store Hand choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.Heals.tome;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.Melee.Maiming.tome;
+            data.hands.name = hands.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.Heals.tome;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.Melee.Maiming.tome;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.hands.name = dataArrays.hands.Melee.Striking.tome;
+            data.hands.name = hands.Melee.Striking.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.hands.name = dataArrays.hands.Melee.Scouting.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.MagRange.tome;
+            data.hands.name = hands.Melee.Scouting.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.Heals.raid;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.Melee.Maiming.raid;
+            data.hands.name = hands.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.Heals.raid;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.Melee.Maiming.raid;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.hands.name = dataArrays.hands.Melee.Striking.raid;
+            data.hands.name = hands.Melee.Striking.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.hands.name = dataArrays.hands.Melee.Scouting.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.hands.name = dataArrays.hands.MagRange.raid;
+            data.hands.name = hands.Melee.Scouting.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.hands.name = hands.MagRange.raid;
           }
         }
         console.log(data);
@@ -426,74 +437,74 @@ module.exports = async function (message) {
         // Begin Legs questions
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.legs.Tank.tome}
-          2. ${dataArrays.legs.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${legs.Tank.tome}
+          2. ${legs.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.legs.Heals.tome}
-          2. ${dataArrays.legs.Heals.raid}`);
-        } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
+          1. ${legs.Heals.tome}
+          2. ${legs.Heals.raid}`);
+        } else if (meleeMaiming.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.legs.Melee.Maiming.tome}
-          2. ${dataArrays.legs.Melee.Maiming.raid}`);
-        } else if (dataArrays.meleeStriking.includes(data.job.toLowerCase())) {
+          1. ${legs.Melee.Maiming.tome}
+          2. ${legs.Melee.Maiming.raid}`);
+        } else if (meleeStriking.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.legs.Melee.Striking.tome}
-          2. ${dataArrays.legs.Melee.Striking.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${legs.Melee.Striking.tome}
+          2. ${legs.Melee.Striking.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.legs.Melee.Scouting.tome}
-          2. ${dataArrays.legs.Melee.Scouting.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${legs.Melee.Scouting.tome}
+          2. ${legs.Melee.Scouting.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.legs.PhysRange.tome}
-          2. ${dataArrays.legs.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${legs.PhysRange.tome}
+          2. ${legs.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.legs.MagRange.tome}
-          2. ${dataArrays.legs.MagRange.raid}`);
+          1. ${legs.MagRange.tome}
+          2. ${legs.MagRange.raid}`);
         }
       } else if (counter === 6) {
         // Store Legs choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.Heals.tome;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.Melee.Maiming.tome;
+            data.legs.name = legs.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.Heals.tome;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.Melee.Maiming.tome;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.legs.name = dataArrays.legs.Melee.Striking.tome;
+            data.legs.name = legs.Melee.Striking.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.legs.name = dataArrays.legs.Melee.Scouting.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.MagRange.tome;
+            data.legs.name = legs.Melee.Scouting.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.Heals.raid;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.Melee.Maiming.raid;
+            data.legs.name = legs.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.Heals.raid;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.Melee.Maiming.raid;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.legs.name = dataArrays.legs.Melee.Striking.raid;
+            data.legs.name = legs.Melee.Striking.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.legs.name = dataArrays.legs.Melee.Scouting.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.legs.name = dataArrays.legs.MagRange.raid;
+            data.legs.name = legs.Melee.Scouting.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.legs.name = legs.MagRange.raid;
           }
         }
         console.log(data);
@@ -501,74 +512,74 @@ module.exports = async function (message) {
         // Begin Feet questions
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.feet.Tank.tome}
-          2. ${dataArrays.feet.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${feet.Tank.tome}
+          2. ${feet.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.feet.Heals.tome}
-          2. ${dataArrays.feet.Heals.raid}`);
-        } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
+          1. ${feet.Heals.tome}
+          2. ${feet.Heals.raid}`);
+        } else if (meleeMaiming.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.feet.Melee.Maiming.tome}
-          2. ${dataArrays.feet.Melee.Maiming.raid}`);
-        } else if (dataArrays.meleeStriking.includes(data.job.toLowerCase())) {
+          1. ${feet.Melee.Maiming.tome}
+          2. ${feet.Melee.Maiming.raid}`);
+        } else if (meleeStriking.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.feet.Melee.Striking.tome}
-          2. ${dataArrays.feet.Melee.Striking.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${feet.Melee.Striking.tome}
+          2. ${feet.Melee.Striking.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.feet.Melee.Scouting.tome}
-          2. ${dataArrays.feet.Melee.Scouting.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${feet.Melee.Scouting.tome}
+          2. ${feet.Melee.Scouting.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.feet.PhysRange.tome}
-          2. ${dataArrays.feet.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${feet.PhysRange.tome}
+          2. ${feet.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.feet.MagRange.tome}
-          2. ${dataArrays.feet.MagRange.raid}`);
+          1. ${feet.MagRange.tome}
+          2. ${feet.MagRange.raid}`);
         }
       } else if (counter === 7) {
         // Store Feet choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.Heals.tome;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.Melee.Maiming.tome;
+            data.feet.name = feet.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.Heals.tome;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.Melee.Maiming.tome;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.feet.name = dataArrays.feet.Melee.Striking.tome;
+            data.feet.name = feet.Melee.Striking.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.feet.name = dataArrays.feet.Melee.Scouting.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.MagRange.tome;
+            data.feet.name = feet.Melee.Scouting.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.Heals.raid;
-          } else if (dataArrays.meleeMaiming.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.Melee.Maiming.raid;
+            data.feet.name = feet.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.Heals.raid;
+          } else if (meleeMaiming.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.Melee.Maiming.raid;
           } else if (
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.feet.name = dataArrays.feet.Melee.Striking.raid;
+            data.feet.name = feet.Melee.Striking.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.feet.name = dataArrays.feet.Melee.Scouting.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.feet.name = dataArrays.feet.MagRange.raid;
+            data.feet.name = feet.Melee.Scouting.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.feet.name = feet.MagRange.raid;
           }
         }
         console.log(data);
@@ -576,71 +587,71 @@ module.exports = async function (message) {
         // Begin Ears choice
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ears.Tank.tome}
-          2. ${dataArrays.ears.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${ears.Tank.tome}
+          2. ${ears.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ears.Heals.tome}
-          2. ${dataArrays.ears.Heals.raid}`);
+          1. ${ears.Heals.tome}
+          2. ${ears.Heals.raid}`);
         } else if (
-          dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-          dataArrays.meleeStriking.includes(data.job.toLowerCase())
+          meleeMaiming.includes(data.job.toLowerCase()) ||
+          meleeStriking.includes(data.job.toLowerCase())
         ) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ears.Melee.Slaying.tome}
-          2. ${dataArrays.ears.Melee.Slaying.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${ears.Melee.Slaying.tome}
+          2. ${ears.Melee.Slaying.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ears.Melee.Aiming.tome}
-          2. ${dataArrays.ears.Melee.Aiming.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${ears.Melee.Aiming.tome}
+          2. ${ears.Melee.Aiming.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ears.PhysRange.tome}
-          2. ${dataArrays.ears.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${ears.PhysRange.tome}
+          2. ${ears.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ears.MagRange.tome}
-          2. ${dataArrays.ears.MagRange.raid}`);
+          1. ${ears.MagRange.tome}
+          2. ${ears.MagRange.raid}`);
         }
       } else if (counter === 8) {
         // Store Ears choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.Heals.tome;
+            data.ears.name = ears.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.ears.name = ears.Heals.tome;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.ears.name = dataArrays.ears.Melee.Slaying.tome;
+            data.ears.name = ears.Melee.Slaying.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.ears.name = dataArrays.ears.Melee.Aiming.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.MagRange.tome;
+            data.ears.name = ears.Melee.Aiming.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.ears.name = ears.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.ears.name = ears.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.Heals.raid;
+            data.ears.name = ears.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.ears.name = ears.Heals.raid;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.ears.name = dataArrays.ears.Melee.Slaying.raid;
+            data.ears.name = ears.Melee.Slaying.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.ears.name = dataArrays.ears.Melee.Aiming.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.ears.name = dataArrays.ears.MagRange.raid;
+            data.ears.name = ears.Melee.Aiming.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.ears.name = ears.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.ears.name = ears.MagRange.raid;
           }
         }
         console.log(data);
@@ -648,71 +659,71 @@ module.exports = async function (message) {
         // Begin Neck choice
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.neck.Tank.tome}
-          2. ${dataArrays.neck.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${neck.Tank.tome}
+          2. ${neck.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.neck.Heals.tome}
-          2. ${dataArrays.neck.Heals.raid}`);
+          1. ${neck.Heals.tome}
+          2. ${neck.Heals.raid}`);
         } else if (
-          dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-          dataArrays.meleeStriking.includes(data.job.toLowerCase())
+          meleeMaiming.includes(data.job.toLowerCase()) ||
+          meleeStriking.includes(data.job.toLowerCase())
         ) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.neck.Melee.Slaying.tome}
-          2. ${dataArrays.neck.Melee.Slaying.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${neck.Melee.Slaying.tome}
+          2. ${neck.Melee.Slaying.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.neck.Melee.Aiming.tome}
-          2. ${dataArrays.neck.Melee.Aiming.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${neck.Melee.Aiming.tome}
+          2. ${neck.Melee.Aiming.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.neck.PhysRange.tome}
-          2. ${dataArrays.neck.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${neck.PhysRange.tome}
+          2. ${neck.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.neck.MagRange.tome}
-          2. ${dataArrays.neck.MagRange.raid}`);
+          1. ${neck.MagRange.tome}
+          2. ${neck.MagRange.raid}`);
         }
       } else if (counter === 9) {
         // Store Neck choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.Heals.tome;
+            data.neck.name = neck.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.neck.name = neck.Heals.tome;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.neck.name = dataArrays.neck.Melee.Slaying.tome;
+            data.neck.name = neck.Melee.Slaying.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.neck.name = dataArrays.neck.Melee.Aiming.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.MagRange.tome;
+            data.neck.name = neck.Melee.Aiming.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.neck.name = neck.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.neck.name = neck.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.Heals.raid;
+            data.neck.name = neck.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.neck.name = neck.Heals.raid;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.neck.name = dataArrays.neck.Melee.Slaying.raid;
+            data.neck.name = neck.Melee.Slaying.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.neck.name = dataArrays.neck.Melee.Aiming.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.neck.name = dataArrays.neck.MagRange.raid;
+            data.neck.name = neck.Melee.Aiming.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.neck.name = neck.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.neck.name = neck.MagRange.raid;
           }
         }
         console.log(data);
@@ -720,71 +731,71 @@ module.exports = async function (message) {
         // Begin Wrists choice
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.wrists.Tank.tome}
-          2. ${dataArrays.wrists.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${wrists.Tank.tome}
+          2. ${wrists.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.wrists.Heals.tome}
-          2. ${dataArrays.wrists.Heals.raid}`);
+          1. ${wrists.Heals.tome}
+          2. ${wrists.Heals.raid}`);
         } else if (
-          dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-          dataArrays.meleeStriking.includes(data.job.toLowerCase())
+          meleeMaiming.includes(data.job.toLowerCase()) ||
+          meleeStriking.includes(data.job.toLowerCase())
         ) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.wrists.Melee.Slaying.tome}
-          2. ${dataArrays.wrists.Melee.Slaying.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${wrists.Melee.Slaying.tome}
+          2. ${wrists.Melee.Slaying.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.wrists.Melee.Aiming.tome}
-          2. ${dataArrays.wrists.Melee.Aiming.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${wrists.Melee.Aiming.tome}
+          2. ${wrists.Melee.Aiming.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.wrists.PhysRange.tome}
-          2. ${dataArrays.wrists.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${wrists.PhysRange.tome}
+          2. ${wrists.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.wrists.MagRange.tome}
-          2. ${dataArrays.wrists.MagRange.raid}`);
+          1. ${wrists.MagRange.tome}
+          2. ${wrists.MagRange.raid}`);
         }
       } else if (counter === 10) {
         // Store Wrists choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.Heals.tome;
+            data.wrists.name = wrists.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.wrists.name = wrists.Heals.tome;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.wrists.name = dataArrays.wrists.Melee.Slaying.tome;
+            data.wrists.name = wrists.Melee.Slaying.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.wrists.name = dataArrays.wrists.Melee.Aiming.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.MagRange.tome;
+            data.wrists.name = wrists.Melee.Aiming.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.wrists.name = wrists.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.wrists.name = wrists.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.Heals.raid;
+            data.wrists.name = wrists.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.wrists.name = wrists.Heals.raid;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.wrists.name = dataArrays.wrists.Melee.Slaying.raid;
+            data.wrists.name = wrists.Melee.Slaying.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.wrists.name = dataArrays.wrists.Melee.Aiming.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.wrists.name = dataArrays.wrists.MagRange.raid;
+            data.wrists.name = wrists.Melee.Aiming.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.wrists.name = wrists.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.wrists.name = wrists.MagRange.raid;
           }
         }
         console.log(data);
@@ -792,71 +803,71 @@ module.exports = async function (message) {
         // Begin Ring0 choice
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring0.Tank.tome}
-          2. ${dataArrays.ring0.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${ring0.Tank.tome}
+          2. ${ring0.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring0.Heals.tome}
-          2. ${dataArrays.ring0.Heals.raid}`);
+          1. ${ring0.Heals.tome}
+          2. ${ring0.Heals.raid}`);
         } else if (
-          dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-          dataArrays.meleeStriking.includes(data.job.toLowerCase())
+          meleeMaiming.includes(data.job.toLowerCase()) ||
+          meleeStriking.includes(data.job.toLowerCase())
         ) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring0.Melee.Slaying.tome}
-          2. ${dataArrays.ring0.Melee.Slaying.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${ring0.Melee.Slaying.tome}
+          2. ${ring0.Melee.Slaying.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring0.Melee.Aiming.tome}
-          2. ${dataArrays.ring0.Melee.Aiming.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${ring0.Melee.Aiming.tome}
+          2. ${ring0.Melee.Aiming.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring0.PhysRange.tome}
-          2. ${dataArrays.ring0.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${ring0.PhysRange.tome}
+          2. ${ring0.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring0.MagRange.tome}
-          2. ${dataArrays.ring0.MagRange.raid}`);
+          1. ${ring0.MagRange.tome}
+          2. ${ring0.MagRange.raid}`);
         }
       } else if (counter === 11) {
         // Store Ring0 choice
         if (message.content === "1") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.Tank.tome;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.Heals.tome;
+            data.ring0.name = ring0.Tank.tome;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.ring0.name = ring0.Heals.tome;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.ring0.name = dataArrays.ring0.Melee.Slaying.tome;
+            data.ring0.name = ring0.Melee.Slaying.tome;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.ring0.name = dataArrays.ring0.Melee.Aiming.tome;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.PhysRange.tome;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.MagRange.tome;
+            data.ring0.name = ring0.Melee.Aiming.tome;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.ring0.name = ring0.PhysRange.tome;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.ring0.name = ring0.MagRange.tome;
           }
         } else if (message.content === "2") {
           if (tanks.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.Tank.raid;
-          } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.Heals.raid;
+            data.ring0.name = ring0.Tank.raid;
+          } else if (heals.includes(data.job.toLowerCase())) {
+            data.ring0.name = ring0.Heals.raid;
           } else if (
-            dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-            dataArrays.meleeStriking.includes(data.job.toLowerCase())
+            meleeMaiming.includes(data.job.toLowerCase()) ||
+            meleeStriking.includes(data.job.toLowerCase())
           ) {
-            data.ring0.name = dataArrays.ring0.Melee.Slaying.raid;
+            data.ring0.name = ring0.Melee.Slaying.raid;
           } else if (
-            dataArrays.meleeScouting.includes(data.job.toLowerCase())
+            meleeScouting.includes(data.job.toLowerCase())
           ) {
-            data.ring0.name = dataArrays.ring0.Melee.Aiming.raid;
-          } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.PhysRange.raid;
-          } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-            data.ring0.name = dataArrays.ring0.MagRange.raid;
+            data.ring0.name = ring0.Melee.Aiming.raid;
+          } else if (physRange.includes(data.job.toLowerCase())) {
+            data.ring0.name = ring0.PhysRange.raid;
+          } else if (magRange.includes(data.job.toLowerCase())) {
+            data.ring0.name = ring0.MagRange.raid;
           }
         }
         console.log(data);
@@ -864,31 +875,31 @@ module.exports = async function (message) {
         // Begin Ring1 choice
         if (tanks.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring1.Tank.tome}
-          2. ${dataArrays.ring1.Tank.raid}`);
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
+          1. ${ring1.Tank.tome}
+          2. ${ring1.Tank.raid}`);
+        } else if (heals.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring1.Heals.tome}
-          2. ${dataArrays.ring1.Heals.raid}`);
+          1. ${ring1.Heals.tome}
+          2. ${ring1.Heals.raid}`);
         } else if (
-          dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-          dataArrays.meleeStriking.includes(data.job.toLowerCase())
+          meleeMaiming.includes(data.job.toLowerCase()) ||
+          meleeStriking.includes(data.job.toLowerCase())
         ) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring1.Melee.Slaying.tome}
-          2. ${dataArrays.ring1.Melee.Slaying.raid}`);
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
+          1. ${ring1.Melee.Slaying.tome}
+          2. ${ring1.Melee.Slaying.raid}`);
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring1.Melee.Aiming.tome}
-          2. ${dataArrays.ring1.Melee.Aiming.raid}`);
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
+          1. ${ring1.Melee.Aiming.tome}
+          2. ${ring1.Melee.Aiming.raid}`);
+        } else if (physRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring1.PhysRange.tome}
-          2. ${dataArrays.ring1.PhysRange.raid}`);
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
+          1. ${ring1.PhysRange.tome}
+          2. ${ring1.PhysRange.raid}`);
+        } else if (magRange.includes(data.job.toLowerCase())) {
           message.reply(`${questions[counter]}
-          1. ${dataArrays.ring1.MagRange.tome}
-          2. ${dataArrays.ring1.MagRange.raid}`);
+          1. ${ring1.MagRange.tome}
+          2. ${ring1.MagRange.raid}`);
         }
       }
     });
@@ -899,37 +910,37 @@ module.exports = async function (message) {
       // store Ring1 choice
       if (answers[answers.length - 1] === "1") {
         if (tanks.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.Tank.tome;
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.Heals.tome;
+          data.ring1.name = ring1.Tank.tome;
+        } else if (heals.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.Heals.tome;
         } else if (
-          dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-          dataArrays.meleeStriking.includes(data.job.toLowerCase())
+          meleeMaiming.includes(data.job.toLowerCase()) ||
+          meleeStriking.includes(data.job.toLowerCase())
         ) {
-          data.ring1.name = dataArrays.ring1.Melee.Slaying.tome;
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.Melee.Aiming.tome;
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.PhysRange.tome;
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.MagRange.tome;
+          data.ring1.name = ring1.Melee.Slaying.tome;
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.Melee.Aiming.tome;
+        } else if (physRange.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.PhysRange.tome;
+        } else if (magRange.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.MagRange.tome;
         }
       } else if (answers[answers.length - 1] === "2") {
         if (tanks.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.Tank.raid;
-        } else if (dataArrays.heals.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.Heals.raid;
+          data.ring1.name = ring1.Tank.raid;
+        } else if (heals.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.Heals.raid;
         } else if (
-          dataArrays.meleeMaiming.includes(data.job.toLowerCase()) ||
-          dataArrays.meleeStriking.includes(data.job.toLowerCase())
+          meleeMaiming.includes(data.job.toLowerCase()) ||
+          meleeStriking.includes(data.job.toLowerCase())
         ) {
-          data.ring1.name = dataArrays.ring1.Melee.Slaying.raid;
-        } else if (dataArrays.meleeScouting.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.Melee.Aiming.raid;
-        } else if (dataArrays.physRange.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.PhysRange.raid;
-        } else if (dataArrays.magRange.includes(data.job.toLowerCase())) {
-          data.ring1.name = dataArrays.ring1.MagRange.raid;
+          data.ring1.name = ring1.Melee.Slaying.raid;
+        } else if (meleeScouting.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.Melee.Aiming.raid;
+        } else if (physRange.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.PhysRange.raid;
+        } else if (magRange.includes(data.job.toLowerCase())) {
+          data.ring1.name = ring1.MagRange.raid;
         }
       }
       console.log(JSON.stringify(data));
