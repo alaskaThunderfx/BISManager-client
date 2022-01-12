@@ -29,7 +29,8 @@ client.on("messageCreate", async (message) => {
       message.reply(`Hello ${message.author.username}! Here are the available commands for BISManager!
     !setbis    (help you set up your BIS for this raid tier)
     !viewset   (shows your current set, if it exists)
-    !updateset (allows you to update your set as you obtain pieces!)`);
+    !updateset (allows you to update your set as you obtain pieces!)
+    !loot      (shows you what loot you need from each raid)`);
     } else {
       message.reply({
         content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
