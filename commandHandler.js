@@ -1,6 +1,8 @@
+const Discord = require("discord.js");
 const axios = require("axios");
 const dataArrays = require("./dataArrays");
-
+const client = require("./index");
+const fs = require("fs");
 const {
   questions,
   jobs,
@@ -24,64 +26,57 @@ const {
   ring1,
   loot,
 } = require("./dataArrays");
+const prefix = "!";
 
-// const questions = dataArrays.questions;
-// const jobs = dataArrays.jobs;
-// const tanks = dataArrays.tanks
-// const heals = dataArrays.heals
-// const meleeMaiming = dataArrays.meleeMaiming;
-// const meleeStriking = dataArrays.meleeStriking;
-// const meleeScouting = dataArrays.meleeScouting;
-// const physRange = dataArrays.physRange;
-// const magRange = dataArrays.magRange;
-// const weapons = dataArrays.weapons
-// const head = dataArrays.head
-// const body = dataArrays.body
-// const hands = dataArrays.hands
-// const legs = dataArrays.legs
-// const feet = dataArrays.feet
-// const ears = dataArrays.ears
-// const neck = dataArrays.neck
-// const wrists = dataArrays.wrists
-// const ring0 = dataArrays.ring0
-// const ring1 = dataArrays.ring1
-// const loot = dataArrays.loot
+client.commands = new Discord.Collection();
+
+const commandFiles = fs
+  .readdirSync("./commands")
+  .filter((file) => file.endsWith(".js"));
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
 
 module.exports = async (message) => {
-  let editMe;
-  if (message.content.toLowerCase() === "hello") {
-    await message.channel.send("hi").then((botMessage) => {
-      console.log(`botMessage =\n${botMessage}`);
-      editMe = botMessage
-    });
-    await console.log(`editMe =]n${editMe}`)
-    
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).split(/ +/);
+  const command = args.shift().toLowerCase()
+
+  if (command === `collector`) {
+    client.commands.get('collector').execute(message, args);
   }
 
-  if (message.content.toLowerCase() === "!bismanager") {
-    let rollingMessage
-    await message.reply('Retrieving that information for you... I know I left it around here somewhere...').then(msg => rollingMessage = msg)
-    const userNames = [];
-    const response = await axios.get(
-      "https://dry-depths-80800.herokuapp.com/users"
-    );
-    response.data.forEach((entry) => userNames.push(entry.user));
-    if (userNames.includes(message.author.username)) {
-      message.reply(`Hello ${message.author.username}! Here are the available commands for BISManager!
-      !setbis    (help you set up your BIS for this raid tier)
-      !viewset   (shows your current set, if it exists)
-      !updateset (allows you to update your set as you obtain pieces!)
-      !loot      (shows you what loot you need from each raid)`);
-    } else {
-      message.reply({
-        content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
-      });
-      axios
-        .post("https://dry-depths-80800.herokuapp.com/users", {
-          user: message.author.username,
-        })
-        .then(console.log("okay"));
-    }
+  if (command === "bismanager") {
+    client.commands.get('bismanager').execute(message, args)
+    // let rollingMessage;
+    // await message
+    //   .reply(
+    //     "Retrieving that information for you... I know I left it around here somewhere..."
+    //   )
+    //   .then((msg) => (rollingMessage = msg));
+    // const userNames = [];
+    // const response = await axios.get(
+    //   "https://dry-depths-80800.herokuapp.com/users"
+    // );
+    // response.data.forEach((entry) => userNames.push(entry.user));
+    // if (userNames.includes(message.author.username)) {
+    //   await rollingMessage.edit(`Hello ${message.author.username}! Here are the available commands for BISManager!
+    //   !setbis    (help you set up your BIS for this raid tier)
+    //   !viewset   (shows your current set, if it exists)
+    //   !updateset (allows you to update your set as you obtain pieces!)
+    //   !loot      (shows you what loot you need from each raid)`);
+    // } else {
+    //   await rollingMessage.edit({
+    //     content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
+    //   });
+    //   await axios
+    //     .post("https://dry-depths-80800.herokuapp.com/users", {
+    //       user: message.author.username,
+    //     })
+    //     .then(console.log("New User Created"));
+    // }
   }
   if (message.content.toLowerCase() === "!viewset") {
     const userNames = [];
