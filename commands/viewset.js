@@ -25,7 +25,7 @@ module.exports = {
           if (entry.user === message.author.username) {
             console.log(entry);
             gearSets.push(entry);
-            const intro = `Here's your gear set, ${entry.user}:`;
+            const intro = `Here's your gear set, ${message.member.displayName}:`;
             const outro = `Have you gotten any of these pieces? If so, type !updateset to let me know!`;
             const job = `Job: ${entry.job}`;
             const mh = entry.weapon.doesHave
@@ -81,7 +81,7 @@ module.exports = {
         });
       } else {
         rollingMessage.edit({
-          content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
+          content: `Hello ${message.member.displayName}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
         });
         axios
           .post("https://dry-depths-80800.herokuapp.com/users", {

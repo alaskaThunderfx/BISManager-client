@@ -298,7 +298,7 @@ module.exports = {
     console.log(p4s);
 
     rollingMessage.edit({
-      content: `Hello, ${gearSet.user}! Here's what you need from this raid tier!
+      content: `Hello, ${message.member.displayName}! Here's what you need from this raid tier!
           ${p1s}
           ${p2s}
           ${p3s}

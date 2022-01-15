@@ -32,7 +32,7 @@ module.exports = {
         };
         const setId = entry._id;
         console.log(data.head);
-        const intro = `Hey, ${entry.user}, if you've obtained any of these, please type "got (item slot)". (An example would be "got ring 1" or "got weapon"):`;
+        const intro = `Hey, ${message.member.displayName}, if you've obtained any of these, please type "got (item slot)". (An example would be "got ring 1" or "got weapon"):`;
         const job = `Job: ${entry.job}`;
         const mh = entry.weapon.doesHave
           ? `~~Weapon: ${entry.weapon.name}~~`

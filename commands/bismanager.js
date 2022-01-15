@@ -16,14 +16,14 @@ module.exports = {
     );
     response.data.forEach((entry) => userNames.push(entry.user));
     if (userNames.includes(message.author.username)) {
-      await rollingMessage.edit(`Hello ${message.author.username}! Here are the available commands for BISManager!
+      await rollingMessage.edit(`Hello, ${message.member.displayName}! Here are the available commands for BISManager!
       !setbis    (helps you set up your BIS for this raid tier)
       !viewset   (shows your current set, if it exists)
       !updateset (allows you to update your set as you obtain pieces!)
       !loot      (shows you what loot you need from each raid)`);
     } else {
       await rollingMessage.edit({
-        content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
+        content: `Hello ${message.member.displayName}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
       });
       await axios
         .post("https://dry-depths-80800.herokuapp.com/users", {

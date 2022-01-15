@@ -39,7 +39,7 @@ module.exports = {
     response.data.forEach((entry) => userNames.push(entry.user));
     if (!userNames.includes(message.author.username)) {
       rollingMessage.edit({
-        content: `Hello ${message.author.username}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
+        content: `Hello ${message.member.displayName}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
       });
       axios
         .post("https://dry-depths-80800.herokuapp.com/users", {
@@ -791,7 +791,7 @@ module.exports = {
             "Content-Type": "application/json",
           },
         })
-        .then(reply("Go ahead and check out your set! Type !viewset to do so!"))
+        .then(reply("Your gear has been set! Go ahead and check it out! Type !viewset to do so!"))
         .catch((err) => console.log(err));
     });
   },
