@@ -37,7 +37,15 @@ module.exports = async (message) => {
     client.commands.get('updateset').execute(message, args)
   }
 
-  if (message.content.toLowerCase() === `!loot`) {
+  if (command === `loot`) {
     client.commands.get('loot').execute(message, args)
+  }
+
+  if (command === 'teams') {
+    client.commands.get('teams').execute(message, args)
+  }
+
+  if(command === `s`) {
+    client.commands.get('s').execute(message, args)
   }
 };
