@@ -1,16 +1,18 @@
+const slot = [
+  `weapon`,
+  `head`,
+  `body`,
+  `hand`,
+  `legs`,
+  `feet`,
+  `ears`,
+  `neck`,
+  `wrists`,
+  `ring0`,
+  `ring1`
+]
+
 const questions = [
-  // "What job are you? (Please enter in the abbreviated format. For instance, if you are a Paladin, please type pld.)",
-  // "Which of these is the BIS for your weapon? (Please respond to the following questions by typing either 1 or 2.)",
-  // "Which of these is the BIS for your head?",
-  // "Which of these is the BIS for your body?",
-  // "Which of these is the BIS for your hands?",
-  // "Which of these is the BIS for your legs?",
-  // "Which of these is the BIS for your feet?",
-  // "Which of these is the BIS for your ears?",
-  // "Which of these is the BIS for your neck?",
-  // "Which of these is the BIS for your wrists?",
-  // "Which of these is the BIS for your first ring?",
-  // "Which of these is the BIS for your second ring?",
   "Choose a weapon!",
   "Choose for your head slot!",
   "Choose for your body slot!",
@@ -93,6 +95,15 @@ const jobicons = {
   SGE: "https://i.imgur.com/FOQUNHA.png",
 };
 
+const roles = {
+  tanks: ["pld", "war", "drk", "gnb"],
+  heals: ["whm", "sch", "ast", "sge"],
+  meleeMaiming: ["rpr", "drg"],
+  meleeStriking: ["sam", "mnk"],
+  meleeScouting: ["nin"],
+  physRange: ["brd", "mch", "dnc"],
+  magRange: ["blm", "smn", "rdm"]
+}
 const tanks = ["pld", "war", "drk", "gnb"];
 const heals = ["whm", "sch", "ast", "sge"];
 const meleeMaiming = ["rpr", "drg"];
@@ -519,9 +530,11 @@ const ring1 = {
 };
 
 module.exports = {
+  slot,
   questions,
   jobicons,
   jobjects,
+  roles,
   tanks,
   heals,
   meleeMaiming,

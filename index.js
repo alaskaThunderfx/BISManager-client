@@ -46,7 +46,7 @@ client.on("messageCreate", commandHandler);
 // });
 
 client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isSelectMenu()) return;
+  // if (!interaction.isSelectMenu() || !interaction.isButton()) return;
 
   console.log(interaction.values)
 });

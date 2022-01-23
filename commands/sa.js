@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js")
+const { MessageActionRow, MessageButton, MessageEmbed, Interaction } = require("discord.js")
 const dataArrays = require(`./../dataArrays`)
 
 module.exports = {
@@ -32,6 +32,26 @@ module.exports = {
         message.channel.send({
             content: dataArrays.questions[0],
             components: [one, two]
+        })
+
+        const filter = (interaction) => {
+            interaction.isButton() && interaction.user.id === message.author.id
+        }
+
+        const collector = message.channel.createMessageComponentCollector({
+            filter,
+            max: 1
+        })
+
+        collector.on('collect', async (interaction) => {
+            console.log(interaction)
+            value = interaction.values[0]
+            interaction.deferUpdate()
+            console.log(interaction.values)
+        })
+
+        collector.on(`end`, async (collected) => {
+            return
         })
     }
 }
