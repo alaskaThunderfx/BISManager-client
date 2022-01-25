@@ -4,16 +4,15 @@ const {
   MessageButton,
 } = require("discord.js");
 const { Client, Message, MessageEmbed } = require(`discord.js`);
-const { slot } = require(`./../dataArrays`) 
+const { slot, questions, jobjects, weapons } = require(`./../dataArrays`);
 const dataArrays = require(`./../dataArrays`);
 const followup = require(`./sa`);
-const { embedColorPicker, embedIconPicker } = require(`./../helperfunctions`);
+const { embedColorPicker, embedIconPicker, gearHandler } = require(`./../helperfunctions`);
 
 module.exports = {
   name: `s`,
   description: `test`,
   async execute(message, args) {
-    console.log(message.author);
     let msg;
     let btnMsgs;
     let value;
@@ -23,14 +22,14 @@ module.exports = {
     let option1;
     let option2;
     let qIndex = 0;
-    let slotIndex = 0
+    let slotIndex = 0;
 
     const embed = new MessageEmbed().setTitle(`Choose an option`);
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
         .setCustomId(`job`)
         .setPlaceholder(`Select an option, please!`)
-        .addOptions(dataArrays.jobjects)
+        .addOptions(jobjects)
     );
 
     await message.reply(`Hi there, ${message.member.displayName}!`);
@@ -42,14 +41,15 @@ module.exports = {
 
     const collector = message.channel.createMessageComponentCollector({
       filter,
-      max: 2,
+      max: questions.length,
     });
 
     collector.on("collect", async (interaction) => {
       interaction.deferUpdate();
       // User selects job
-      job = dataArrays.jobjects.find((j) => j.value === interaction.values[0]);
+
       if (interaction.isSelectMenu()) {
+        job = jobjects.find((j) => j.value === interaction.values[0]);
         // Begin building job/set display embed
         embed
           .setColor(embedColorPicker(job.value))
@@ -70,13 +70,12 @@ module.exports = {
         // begin Weapon question, pass through job.value, slot
         // somthing like raidButtonPicker(job.value, slot[slot])
 
-        for (const [key, value] of Object.entries(dataArrays.weapons)) {
+        for (const [key, value] of Object.entries(weapons)) {
           if (key === job.value.toUpperCase()) {
             option1 = value.raid;
             option2 = value.tome;
           }
         }
-
         one = new MessageActionRow().addComponents(
           new MessageButton()
             .setCustomId(`${option1}`)
@@ -92,23 +91,37 @@ module.exports = {
         );
 
         btnMsgs = await message.channel.send({
-          content: dataArrays.questions[qIndex],
+          content: questions[qIndex],
           components: [one, two],
         });
-        
+        // begin cycling through the questions with buttons
       } else {
-        console.log(`button`);
-        option1 = dataArrays.questions[qIndex];
-        await btnMsgs.edit({
-          content: `${dataArrays.questions[qIndex]}`,
-          components: [],
+        let options = gearHandler(job.value, slotIndex)
+        console.log(`options:\n${options}`)
+        embed.addField(
+          `${slot[slotIndex]}: `,
+          `${interaction.customId}`,
+          false
+        );
+
+        slotIndex++;
+        await btnMsgs.delete();
+        if (qIndex !== questions.length) {
+          btnMsgs = await message.channel.send({
+            content: questions[qIndex],
+            components: [one, two],
+          });
+        }
+        await msg.edit({
           embeds: [embed],
         });
+        option1 = options[0]
+        option2 = options[1]
       }
-      qIndex++
-      slotIndex++
+      qIndex++;
     });
     collector.on(`end`, async (collected) => {
+      console.log(`done`);
       await btnMsgs.edit(`under construction`);
     });
     // const gearButtons = new MessageActionRow().addComponents(

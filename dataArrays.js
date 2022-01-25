@@ -1,15 +1,15 @@
 const slot = [
-  `weapon`,
-  `head`,
-  `body`,
-  `hand`,
-  `legs`,
-  `feet`,
-  `ears`,
-  `neck`,
-  `wrists`,
-  `ring0`,
-  `ring1`
+  `Weapon`,
+  `Head`,
+  `Body`,
+  `Hands`,
+  `Legs`,
+  `Feet`,
+  `Ears`,
+  `Neck`,
+  `Wrists`,
+  `Left Ring`,
+  `Right Ring`
 ]
 
 const questions = [
