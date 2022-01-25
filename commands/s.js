@@ -3,10 +3,8 @@ const {
   MessageSelectMenu,
   MessageButton,
 } = require("discord.js");
-const { Client, Message, MessageEmbed } = require(`discord.js`);
+const { MessageEmbed } = require(`discord.js`);
 const { slot, questions, jobjects, weapons } = require(`./../dataArrays`);
-const dataArrays = require(`./../dataArrays`);
-const followup = require(`./sa`);
 const {
   embedColorPicker,
   embedIconPicker,
@@ -19,7 +17,6 @@ module.exports = {
   async execute(message, args) {
     let msg;
     let btnMsgs;
-    let value;
     let job;
     let one;
     let two;
