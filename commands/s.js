@@ -7,7 +7,11 @@ const { Client, Message, MessageEmbed } = require(`discord.js`);
 const { slot, questions, jobjects, weapons } = require(`./../dataArrays`);
 const dataArrays = require(`./../dataArrays`);
 const followup = require(`./sa`);
-const { embedColorPicker, embedIconPicker, gearHandler } = require(`./../helperfunctions`);
+const {
+  embedColorPicker,
+  embedIconPicker,
+  gearHandler,
+} = require(`./../helperfunctions`);
 
 module.exports = {
   name: `s`,
@@ -24,11 +28,11 @@ module.exports = {
     let qIndex = 0;
     let slotIndex = 0;
 
-    const embed = new MessageEmbed().setTitle(`Choose an option`);
+    const embed = new MessageEmbed().setTitle(`Let's set up your BIS!`);
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
         .setCustomId(`job`)
-        .setPlaceholder(`Select an option, please!`)
+        .setPlaceholder(`Select your job, please!`)
         .addOptions(jobjects)
     );
 
@@ -41,7 +45,7 @@ module.exports = {
 
     const collector = message.channel.createMessageComponentCollector({
       filter,
-      max: questions.length,
+      max: questions.length + 1,
     });
 
     collector.on("collect", async (interaction) => {
@@ -96,8 +100,23 @@ module.exports = {
         });
         // begin cycling through the questions with buttons
       } else {
-        let options = gearHandler(job.value, slotIndex)
-        console.log(`options:\n${options}`)
+        option1 = gearHandler(job.value, slotIndex)[0];
+        option2 = gearHandler(job.value, slotIndex)[1];
+
+        one = new MessageActionRow().addComponents(
+          new MessageButton()
+            .setCustomId(`${option1}`)
+            .setLabel(`${option1}`)
+            .setStyle(`SECONDARY`)
+        );
+
+        two = new MessageActionRow().addComponents(
+          new MessageButton()
+            .setCustomId(`${option2}`)
+            .setLabel(`${option2}`)
+            .setStyle(`SECONDARY`)
+        );
+
         embed.addField(
           `${slot[slotIndex]}: `,
           `${interaction.customId}`,
@@ -107,79 +126,28 @@ module.exports = {
         slotIndex++;
         await btnMsgs.delete();
         if (qIndex !== questions.length) {
-          btnMsgs = await message.channel.send({
-            content: questions[qIndex],
-            components: [one, two],
+          await msg.edit({
+            embeds: [embed],
+          }) . then(
+          btnMsgs = await message.channel
+            .send({
+              content: questions[qIndex],
+              components: [one, two],
+            }))
+        } else {
+          await msg.edit({
+            embeds: [embed],
           });
         }
-        await msg.edit({
-          embeds: [embed],
-        });
-        option1 = options[0]
-        option2 = options[1]
       }
       qIndex++;
     });
+
     collector.on(`end`, async (collected) => {
-      console.log(`done`);
-      await btnMsgs.edit(`under construction`);
+      console.log(`collecting ended`)
+      collected.forEach((t) => {
+        console.log(t.values ? t.values : t.customId)
+      })
     });
-    // const gearButtons = new MessageActionRow().addComponents(
-
-    // )
-
-    //   Buttons
-    //     let msgRoll;
-    //     const row = new MessageActionRow()
-    //     .addComponents(
-    //       new MessageButton()
-    //         .setCustomId(`dick`)
-    //         .setEmoji("👌")
-    //         .setLabel("eat a dick")
-    //         .setStyle("SUCCESS")
-    //     )
-    //     .addComponents(
-    //         new MessageButton()
-    //         .setCustomId('othadiock')
-    //         .setEmoji('😒')
-    //         .setLabel(`eat something else`)
-    //         .setStyle('SUCCESS')
-    //     );
-    //     await message
-    //       .reply({
-    //         content: `hello`,
-    //         components: [row],
-    //       })
-    //       .then((m) => (msgRoll = m));
-
-    //     const filter = (m) => message.author.id === m.user.id;
-
-    //     const collector = message.channel.createMessageComponentCollector({
-    //       filter,
-    //       max: 1,
-    //       time: 15000,
-    //     });
-
-    //     collector.on(`collect`, async (interaction) => {
-    //       interaction
-    //         .reply({
-    //           content: `you clicked a button`,
-    //         })
-    //         .then((msg) => console.log(msg));
-    //     });
-
-    //     collector.on(`end`, async (collection) => {
-    //       collection.forEach((click) => {
-    //         console.log(click.user.id, click.customId);
-    //       });
-
-    //       if (collection.first()?.customId === "dick") {
-    //       }
-
-    //       await msgRoll.edit({
-    //         content: "penis",
-    //         components: [],
-    //       });
-    //     });
   },
 };

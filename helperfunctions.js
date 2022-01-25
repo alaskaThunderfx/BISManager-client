@@ -56,135 +56,168 @@ const weaponPicker = (job) => {
 const gearHandler = (job, slotIndex) => {
   let rFilter;
   let mFilter;
+  let aFilter
   let option1;
   let option2;
 
-  console.log(`job = ${job}\nslotIndex = ${slotIndex}`);
   for (const [key, value] of Object.entries(roles)) {
     if (value.includes(job)) {
-      console.log(`in role switch statement`);
       switch (key) {
         case `tanks`:
-          console.log(`in tanks`);
           rFilter = `Tank`;
           break;
         case `heals`:
-          return (rFilter = `Heals`);
+          rFilter = `Heals`;
+          break;
         case `meleeMaiming`:
           rFilter = `Melee`;
-          return (mFilter = `Maiming`);
+          mFilter = `Maiming`;
+          break;
         case `meleeStriking`:
           rFilter = `Melee`;
-          return (mFilter = `Striking`);
+          mFilter = `Striking`;
+          break;
         case `meleeScouting`:
           rFilter = `Melee`;
-          return (mFilter = `Scouting`);
+          mFilter = `Scouting`;
+          break;
         case `physRange`:
-          return (rFilter = `PhysRange`);
+          rFilter = `PhysRange`;
+          break;
         case `magRange`:
-          return (rFilter = `MagRange`);
+          rFilter = `MagRange`;
+          break;
         default:
           break;
       }
     }
   }
-  console.log(`rFilter:\n${rFilter}`);
+  // console.log(`rFilter:\n${rFilter}`);
+  console.log(`mFilter:\n${mFilter}`)
 
   if (rFilter !== `Melee`) {
     console.log(`slotIndex:\n${slotIndex}`);
     switch (slotIndex + 1) {
       case 1:
-        console.log(`in case 1`)
+        console.log(`in case 1`);
         option1 = head[rFilter].raid;
         option2 = head[rFilter].tome;
         break;
       case 2:
-        option1 = body.rFilter.raid;
-        option2 = body.rFilter.tome;
-        return [option1, option2];
+        console.log(`in case 2`);
+        option1 = body[rFilter].raid;
+        option2 = body[rFilter].tome;
+        // [option1, option2];
+        break
       case 3:
-        option1 = hands.rFilter.raid;
-        option2 = hands.rFilter.tome;
-        return [option1, option2];
+        option1 = hands[rFilter].raid;
+        option2 = hands[rFilter].tome;
+        // [option1, option2];
+        break
       case 4:
-        option1 = legs.rFilter.raid;
-        option2 = legs.rFilter.tome;
-        return [option1, option2];
+        option1 = legs[rFilter].raid;
+        option2 = legs[rFilter].tome;
+        // [option1, option2];
+        break
       case 5:
-        option1 = feet.rFilter.raid;
-        option2 = feet.rFilter.tome;
-        return [option1, option2];
+        option1 = feet[rFilter].raid;
+        option2 = feet[rFilter].tome;
+        // [option1, option2];
+        break
       case 6:
-        option1 = ears.rFilter.raid;
-        option2 = ears.rFilter.tome;
-        return [option1, option2];
+        option1 = ears[rFilter].raid;
+        option2 = ears[rFilter].tome;
+        // [option1, option2];
+        break
       case 7:
-        option1 = neck.rFilter.raid;
-        option2 = neck.rFilter.tome;
-        return [option1, option2];
+        option1 = neck[rFilter].raid;
+        option2 = neck[rFilter].tome;
+        // [option1, option2];
+        break
       case 8:
-        option1 = wrists.rFilter.raid;
-        option2 = wrists.rFilter.tome;
-        return [option1, option2];
+        option1 = wrists[rFilter].raid;
+        option2 = wrists[rFilter].tome;
+        // [option1, option2];
+        break
       case 9:
-        option1 = ring0.rFilter.raid;
-        option2 = ring0.rFilter.tome;
-        return [option1, option2];
+        option1 = ring0[rFilter].raid;
+        option2 = ring0[rFilter].tome;
+        // [option1, option2];
+        break
       case 10:
-        option1 = ring1.rFilter.raid;
-        option2 = ring1.rFilter.tome;
-        return [option1, option2];
+        option1 = ring1[rFilter].raid;
+        option2 = ring1[rFilter].tome;
+        // [option1, option2];
+        break
       default:
         break;
     }
+  // Questions for melee DPS
   } else {
-    switch (slotIndex) {
+    if (mFilter === `Maiming` || mFilter === `Striking`) {
+      aFilter = `Slaying`
+    } else {
+      aFilter = `Aiming`
+    }
+    console.log(`aFilter:\n${aFilter}`)
+    switch (slotIndex + 1) {
       case 1:
-        option1 = head.rFilter.mFilter.raid;
-        option2 = head.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = head[rFilter][mFilter].raid;
+        option2 = head[rFilter][mFilter].tome;
+        // [option1, option2];
+        break
       case 2:
-        option1 = body.rFilter.mFilter.raid;
-        option2 = body.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = body[rFilter][mFilter].raid;
+        option2 = body[rFilter][mFilter].tome;
+        // [option1, option2];
+        break
       case 3:
-        option1 = hands.rFilter.mFilter.raid;
-        option2 = hands.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = hands[rFilter][mFilter].raid;
+        option2 = hands[rFilter][mFilter].tome;
+        // [option1, option2];
+        break
       case 4:
-        option1 = legs.rFilter.mFilter.raid;
-        option2 = legs.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = legs[rFilter][mFilter].raid;
+        option2 = legs[rFilter][mFilter].tome;
+        // [option1, option2];
+        break
       case 5:
-        option1 = feet.rFilter.mFilter.raid;
-        option2 = feet.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = feet[rFilter][mFilter].raid;
+        option2 = feet[rFilter][mFilter].tome;
+        // [option1, option2];
+        break
       case 6:
-        option1 = ears.rFilter.mFilter.raid;
-        option2 = ears.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = ears[rFilter][aFilter].raid;
+        option2 = ears[rFilter][aFilter].tome;
+        // [option1, option2];
+        break
       case 7:
-        option1 = neck.rFilter.mFilter.raid;
-        option2 = neck.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = neck[rFilter][aFilter].raid;
+        option2 = neck[rFilter][aFilter].tome;
+        // [option1, option2];
+        break
       case 8:
-        option1 = wrists.rFilter.mFilter.raid;
-        option2 = wrists.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = wrists[rFilter][aFilter].raid;
+        option2 = wrists[rFilter][aFilter].tome;
+        // [option1, option2];
+        break
       case 9:
-        option1 = ring0.rFilter.mFilter.raid;
-        option2 = ring0.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = ring0[rFilter][aFilter].raid;
+        option2 = ring0[rFilter][aFilter].tome;
+        // [option1, option2];
+        break
       case 10:
-        option1 = ring1.rFilter.mFilter.raid;
-        option2 = ring1.rFilter.mFilter.tome;
-        return [option1, option2];
+        option1 = ring1[rFilter][aFilter].raid;
+        option2 = ring1[rFilter][aFilter].tome;
+        // [option1, option2];
+        break
       default:
         break;
     }
   }
   console.log(`option1:\n${option1}\noption2:\n${option2}`);
-  return [option1, option2];
+  // const options = [option1, option2]
+  return [ option1, option2 ]
 };
 
 module.exports = {
