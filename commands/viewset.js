@@ -1,96 +1,99 @@
-const axios = require("axios");
+const axios = require(`axios`)
+const {
+    MessageActionRow,
+    MessageSelectMenu,
+    MessageEmbed
+} = require("discord.js");
+const { slot } = require(`../dataArrays`)
+const { getUserInfo, viewSetsHandler, embedColorPicker, embedIconPicker } = require(`../helperfunctions`)
 
 module.exports = {
-  name: "viewset",
-  description: "allows users to see their current set",
-  async execute(message, args) {
-    let rollingMessage;
-    await message
-      .reply(
-        "Retrieving that information for you... I know I left it around here somewhere..."
-      )
-      .then((msg) => (rollingMessage = msg));
-    const userNames = [];
-    const gearSets = [];
-    try {
-      const response = await axios.get(
-        "https://dry-depths-80800.herokuapp.com/users"
-      );
-      response.data.forEach((entry) => userNames.push(entry.user));
-      if (userNames.includes(message.author.username)) {
-        const gearsets = await axios.get(
-          "https://dry-depths-80800.herokuapp.com/gearsets"
-        );
-        gearsets.data.forEach((entry) => {
-          if (entry.user === message.author.username) {
-            console.log(entry);
-            gearSets.push(entry);
-            const intro = `Here's your gear set, ${message.member.displayName}:`;
-            const outro = `Have you gotten any of these pieces? If so, type !updateset to let me know!`;
-            const job = `Job: ${entry.job}`;
-            const mh = entry.weapon.doesHave
-              ? `~~Weapon: ${entry.weapon.name}~~`
-              : `Weapon: ${entry.weapon.name}`;
-            const head = entry.head.doesHave
-              ? `~~Head: ${entry.head.name}~~`
-              : `Head: ${entry.head.name}`;
-            const body = entry.body.doesHave
-              ? `~~Body: ${entry.body.name}~~`
-              : `Body: ${entry.body.name}`;
-            const hands = entry.hands.doesHave
-              ? `~~Hands: ${entry.hands.name}~~`
-              : `Hands: ${entry.hands.name}`;
-            const legs = entry.legs.doesHave
-              ? `~~Legs: ${entry.legs.name}~~`
-              : `Legs: ${entry.legs.name}`;
-            const feet = entry.feet.doesHave
-              ? `~~Feet: ${entry.feet.name}~~`
-              : `Feet: ${entry.feet.name}`;
-            const ears = entry.ears.doesHave
-              ? `~~Ears: ${entry.ears.name}~~`
-              : `Ears: ${entry.ears.name}`;
-            const neck = entry.neck.doesHave
-              ? `~~Neck: ${entry.neck.name}~~`
-              : `Neck: ${entry.neck.name}`;
-            const wrists = entry.wrists.doesHave
-              ? `~~Wrists: ${entry.wrists.name}~~`
-              : `Wrists: ${entry.wrists.name}`;
-            const ring0 = entry.ring0.doesHave
-              ? `~~Ring 1: ${entry.ring0.name}~~`
-              : `Ring 1: ${entry.ring0.name}`;
-            const ring1 = entry.ring1.doesHave
-              ? `~~Ring 2: ${entry.ring1.name}~~`
-              : `Ring 2: ${entry.ring1.name}`;
-            const statement = `${intro}
-                  ${job}
-                  ${mh}
-                  ${head}
-                  ${body}
-                  ${hands}
-                  ${legs}
-                  ${feet}
-                  ${ears}
-                  ${neck}
-                  ${wrists}
-                  ${ring0}
-                  ${ring1}
-      
-                  *${outro}*`;
-            rollingMessage.edit({ content: statement });
-          }
-        });
-      } else {
-        rollingMessage.edit({
-          content: `Hello ${message.member.displayName}! Nice to meet you! You've been added to the BISManager users! Please type !bismanager to see a list of commands!`,
-        });
-        axios
-          .post("https://dry-depths-80800.herokuapp.com/users", {
-            user: message.author.username,
-          })
-          .then(console.log("okay"));
-      }
-    } catch (err) {
-      console.error(err);
+    name: `viewset`,
+    description: `Allows the user to view the gear sets they've made.`,
+    async execute(message, args) {
+        const jobs = []
+        const userInfo = await getUserInfo(message)
+
+
+        if (userInfo.gearSets.length === 0) {
+            message.reply(`You haven't added any gear sets yet!`)
+            return
+        }
+        const userSets = userInfo.gearSets
+        for (const set in userInfo.gearSets) {
+            jobs.push(userInfo.gearSets[set].job)
+            // jobs[userInfo.gearSets[set].job.value] = userInfo.gearSets[set].job
+        }
+        const sets = viewSetsHandler(jobs)
+        const forTheMenu = []
+
+        for (const job in sets) {
+            forTheMenu.push(sets[job][Object.keys(sets[job])])
+        }
+        const embed = new MessageEmbed().setTitle(`Here's the jobs you have sets for!`);
+        const row = new MessageActionRow().addComponents(
+            new MessageSelectMenu()
+                .setCustomId(`sets`)
+                .setPlaceholder(`Choose the set you'd like to view.`)
+                .addOptions(forTheMenu)
+        )
+
+        await message.reply(`Hey there, ${message.member.displayName}!`)
+        const dropdown = await message.channel.send({ embeds: [embed], components: [row] })
+
+        const filter = (interaction) => interaction.user.id === message.author.id;
+        const collector = message.channel.createMessageComponentCollector({
+            filter,
+            max: 1
+        })
+
+        collector.on(`collect`, async (interaction) => {
+            console.log(interaction.values[0])
+            let joB
+            for (const set in sets) {
+                if (sets[set][interaction.values[0]]) {
+                    joB = sets[set][interaction.values[0]]
+                }
+            }
+            console.log(joB)
+            let counter = 0
+
+            for (const set in userSets) {
+                if (userSets[set].job === joB.value) {
+                    for (const [key, value] of Object.entries(userSets[set])) {
+                        if (key !== `job` && counter !== 11) {
+                            console.log(slot[counter])
+                            console.log(value.name)
+                            console.log(value.doesHave)
+                            embed.addField(
+                                `${slot[counter]}`,
+                                `${value.doesHave ? `~~${value.name}~~` : `${value.name}`}`,
+                                false
+                            )
+                            counter++
+                        }
+                    }
+
+                }
+            }
+
+            embed
+                .setColor(embedColorPicker(joB.value))
+                .setTitle(`${joB.label}`)
+                .setAuthor({
+                    name: `${message.member.displayName}`,
+                    iconURL: `${message.author.avatarURL()}`,
+                })
+                .setDescription(`*Best in slot*`)
+                .setThumbnail(`${embedIconPicker(joB)}`);
+            dropdown.edit({
+                embeds: [embed],
+                components: []
+            })
+        })
+
+        collector.on(`end`, collected => {
+            return
+        })
     }
-  },
-};
+}

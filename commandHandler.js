@@ -46,7 +46,7 @@ module.exports = async (message) => {
     client.commands.get('teams').execute(message, args)
   }
 
-  if (command === `s`) {
-    client.commands.get(`s`).execute(message, args)
-  }
+  // if (command === `s`) {
+  //   client.commands.get(`s`).execute(message, args)
+  // }
 };

@@ -68,7 +68,7 @@ module.exports = {
     collector.on("collect", async (interaction) => {
       interaction.deferUpdate();
       // User selects job
-
+      try{
       if (interaction.isSelectMenu()) {
         // check if the job they selected already has a set in the database
         job = jobjects.find((j) => j.value === interaction.values[0]);
@@ -165,6 +165,10 @@ module.exports = {
         }
       }
       qIndex++;
+    } catch {
+      message.reply(`Oh no, something went wrong! You may have pressed a button more than once :(. Please try again, this set was not added.`)
+      collector.stop()
+    }
     });
 
     collector.on(`end`, async (collected) => {
