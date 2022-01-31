@@ -1,218 +1,94 @@
-const { default: axios } = require("axios");
+const axios = require(`axios`)
 const {
-  MessageActionRow,
-  MessageSelectMenu,
-  MessageButton,
-  MessageEmbed
+    MessageActionRow,
+    MessageSelectMenu,
+    MessageEmbed
 } = require("discord.js");
-const { slot, questions, jobjects, weapons } = require(`./../dataArrays`);
-const {
-  getUserInfo,
-  embedColorPicker,
-  embedIconPicker,
-  gearHandler,
-} = require(`./../helperfunctions`);
+const { slot } = require(`./../dataArrays`)
+const { getUserInfo, viewSetsHandler, embedColorPicker, embedIconPicker } = require(`../helperfunctions`)
 
 module.exports = {
-  name: `s`,
-  description: `test`,
-  async execute(message, args) {
-    const userInfo = await getUserInfo(message)
-    let existingSets
-    if (userInfo.gearSets) {
-      existingSets = []
-      for (const set in userInfo.gearSets) {
-        existingSets.push(userInfo.gearSets[set].job)
-      }
-      console.log(existingSets)
-    } else {
-      existingSets = false
+    name: `s`,
+    description: `test`,
+    async execute(message, args) {
+        const jobs = []
+        const userInfo = await getUserInfo(message)
+
+
+        if (userInfo.gearSets.length === 0) {
+            message.reply(`You haven't added any gear sets yet!`)
+            return
+        }
+        const userSets = userInfo.gearSets
+        for (const set in userInfo.gearSets) {
+            jobs.push(userInfo.gearSets[set].job)
+            // jobs[userInfo.gearSets[set].job.value] = userInfo.gearSets[set].job
+        }
+        const sets = viewSetsHandler(jobs)
+        const forTheMenu = []
+
+        for (const job in sets) {
+            forTheMenu.push(sets[job][Object.keys(sets[job])])
+        }
+        const embed = new MessageEmbed().setTitle(`Here's the jobs you have sets for!`);
+        const row = new MessageActionRow().addComponents(
+            new MessageSelectMenu()
+                .setCustomId(`sets`)
+                .setPlaceholder(`Choose the set you'd like to view.`)
+                .addOptions(forTheMenu)
+        )
+
+        await message.reply(`Hey there, ${message.member.displayName}!`)
+        const dropdown = await message.channel.send({ embeds: [embed], components: [row] })
+
+        const filter = (interaction) => interaction.user.id === message.author.id;
+        const collector = message.channel.createMessageComponentCollector({
+            filter,
+            max: 1
+        })
+
+        collector.on(`collect`, async (interaction) => {
+            console.log(interaction.values[0])
+            let joB
+            for (const set in sets) {
+                // console.log(sets[set][interaction.values[0]])
+                if (sets[set][interaction.values[0]]) {
+                    joB = sets[set][interaction.values[0]]
+                }
+            }
+            // console.log(joB)
+            let counter = 0
+
+            for (const set in userSets) {
+                if (userSets[set].job === joB.value) {
+                    for (const [key, value] of Object.entries(userSets[set])) {
+                        if (key !== `job` && counter !== 11) {
+                            console.log(slot[counter])
+                            console.log(value.name)
+                            console.log(value.doesHave)
+                            embed.addField(
+                                `${slot[counter]}`,
+                                `${value.doesHave ? `~~${value.name}~~` : `${value.name}`}`,
+                                false
+                            )
+                            counter++
+                        }
+                    }
+
+                }
+            }
+            embed
+                .setColor(embedColorPicker(joB.value))
+                .setTitle(`${joB.label}`)
+                .setAuthor({
+                    name: `${message.member.displayName}`,
+                    iconURL: `${message.author.avatarURL()}`,
+                })
+                .setDescription(`*Best in slot*`)
+                .setThumbnail(`${embedIconPicker(joB)}`);
+        })
+        collector.on(`end`, collected => {
+            return
+        }) 
     }
-
-    let msg;
-    let btnMsgs;
-    let job;
-    let one;
-    let two;
-    let option1;
-    let option2;
-    let qIndex = 0;
-    let slotIndex = 0;
-
-    const embed = new MessageEmbed().setTitle(`Let's set up your BIS!`);
-    const row = new MessageActionRow().addComponents(
-      new MessageSelectMenu()
-        .setCustomId(`job`)
-        .setPlaceholder(`Select your job, please!`)
-        .addOptions(jobjects)
-    );
-
-    await message.reply(`Hi there, ${message.member.displayName}! Please be patient as you click through my questions! I can be a bit slow sometimes, so be sure not to click more than one time per question!`);
-    await message.channel
-      .send({ embeds: [embed], components: [row] })
-      .then((input) => (msg = input));
-
-    const filter = (interaction) => interaction.user.id === message.author.id;
-
-    const collector = message.channel.createMessageComponentCollector({
-      filter,
-      max: questions.length + 1,
-    });
-
-    collector.on("collect", async (interaction) => {
-      interaction.deferUpdate();
-      // User selects job
-
-      if (interaction.isSelectMenu()) {
-        // check if the job they selected already has a set in the database
-        job = jobjects.find((j) => j.value === interaction.values[0]);
-        if (existingSets.includes(job.value)) {
-          message.reply(`You already have a set for ${job.value.toUpperCase()}! Type !bismanager to see the list of options again if you would like to modify the ${job.value.toUpperCase()} set.`)
-          collector.stop()
-          return
-        }
-        // Begin building job/set display embed
-        embed
-          .setColor(embedColorPicker(job.value))
-          .setTitle(`${job.label}`)
-          .setAuthor({
-            name: `${message.member.displayName}`,
-            iconURL: `${message.author.avatarURL()}`,
-          })
-          .setDescription(`*Best in slot*`)
-          .setThumbnail(`${embedIconPicker(job)}`);
-        // Update dropdown message with embed
-        await msg.edit({
-          content: `Okay, great! Let's make a set for ${job.emoji}${job.label}!`,
-          components: [],
-          embeds: [embed],
-        });
-
-        // begin Weapon question, pass through job.value, slot
-        // somthing like raidButtonPicker(job.value, slot[slot])
-
-        for (const [key, value] of Object.entries(weapons)) {
-          if (key === job.value.toUpperCase()) {
-            option1 = value.raid;
-            option2 = value.tome;
-          }
-        }
-        one = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option1}`)
-            .setLabel(`${option1}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        two = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option2}`)
-            .setLabel(`${option2}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        btnMsgs = await message.channel.send({
-          content: questions[qIndex],
-          components: [one, two],
-        });
-        // begin cycling through the questions with buttons
-      } else {
-        option1 = gearHandler(job.value, slotIndex)[0];
-        option2 = gearHandler(job.value, slotIndex)[1];
-
-        one = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option1}`)
-            .setLabel(`${option1}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        two = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option2}`)
-            .setLabel(`${option2}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        embed.addField(
-          `${slot[slotIndex]}: `,
-          `${interaction.customId}`,
-          false
-        );
-
-        slotIndex++;
-        await btnMsgs.delete();
-        if (qIndex !== questions.length) {
-          await msg.edit({
-            embeds: [embed],
-          }).then(
-            btnMsgs = await message.channel
-              .send({
-                content: questions[qIndex],
-                components: [one, two],
-              }))
-            .catch(console.error)
-        } else {
-          await msg.edit({
-            embeds: [embed],
-          });
-        }
-      }
-      qIndex++;
-    });
-
-    collector.on(`end`, async (collected) => {
-      if (collected.size < 12) {
-        return
-      }
-      const retrieved = []
-      await collected.forEach((t) => {
-        t.values ? retrieved.push(t.values) : retrieved.push(t.customId)
-      })
-      const sendData = {
-        userId: userInfo._id,
-        job: retrieved[0][0],
-        weapon: {
-          name: retrieved[1]
-        },
-        head: {
-          name: retrieved[2]
-        },
-        body: {
-          name: retrieved[3]
-        },
-        hands: {
-          name: retrieved[4]
-        },
-        legs: {
-          name: retrieved[5]
-        },
-        feet: {
-          name: retrieved[6]
-        },
-        ears: {
-          name: retrieved[7]
-        },
-        neck: {
-          name: retrieved[8]
-        },
-        wrists: {
-          name: retrieved[9]
-        },
-        ring0: {
-          name: retrieved[10]
-        },
-        ring1: {
-          name: retrieved[11]
-        }
-      }
-      axios.post("http://localhost:4741/gearsets", sendData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(message.reply(`Okay your set for ${retrieved[0][0].toUpperCase()} has been added!`))
-      .catch(console.error)
-    });
-  },
-};
+}

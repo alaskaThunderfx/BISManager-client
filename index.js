@@ -10,7 +10,6 @@ const {
 } = require("discord.js");
 const commandHandler = require("./commandHandler");
 const dotenv = require("dotenv").config();
-const s = require(`./commands/s`)
 
 const client = new Client({
   intents: [
@@ -48,7 +47,7 @@ client.on("messageCreate", commandHandler);
 client.on("interactionCreate", async (interaction) => {
   // if (!interaction.isSelectMenu() || !interaction.isButton()) return;
 
-  console.log(interaction.values)
+  console.log(`interaction.values in InteractionCreate:\n${interaction.values}`)
 });
 
 client.login(process.env.TOKEN);

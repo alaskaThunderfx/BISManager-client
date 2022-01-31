@@ -1,6 +1,7 @@
 const {
   roles,
   jobicons,
+  jobjects,
   weapons,
   head,
   body,
@@ -46,6 +47,18 @@ const getUserInfo = async (message) => {
     }).then(res => userInfo = res.data)
     return userInfo
   }
+}
+
+const viewSetsHandler = (jobArray) => {
+  const setObjects = []
+  for (let job in jobjects) {
+    const obj = {}
+    if (jobArray.includes(jobjects[job].value)) {
+      obj[`${jobjects[job].value}`] = jobjects[job]
+      setObjects.push(obj)
+    }
+  }
+  return setObjects
 }
 
 const embedColorPicker = (job) => {
@@ -256,10 +269,13 @@ const gearHandler = (job, slotIndex) => {
 
 
 
+
+
 module.exports = {
   embedColorPicker,
   embedIconPicker,
   weaponPicker,
   gearHandler,
-  getUserInfo
+  getUserInfo,
+  viewSetsHandler
 };
