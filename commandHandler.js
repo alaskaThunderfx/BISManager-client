@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = require("./index");
 const fs = require("fs");
 const prefix = "!";
+const { getUserId } = require(`./helperfunctions`)
 
 client.commands = new Discord.Collection();
 

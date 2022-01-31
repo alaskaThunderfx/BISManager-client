@@ -14,6 +14,40 @@ const {
   ring1,
 } = require(`./dataArrays`);
 
+const axios = require(`axios`)
+
+const getUserInfo = async (message) => {
+  const user = `${message.author.username}#${message.author.discriminator}`
+  const uDict = {}
+  let userId
+  let userInfo
+  await axios.get(
+    "https://dry-depths-80800.herokuapp.com/users"
+  ).then(res => {
+    for (const entry in res.data) {
+      // uDict[res.data[entry].user] = res.data[entry]._id
+      if (res.data[entry].user === user) {
+        userInfo = res.data[entry]
+        uDict[user] = userInfo._id
+      }
+    }
+  })
+
+  if (uDict[user]) {
+    userId = uDict[user]
+    console.log(`This user already exists! Good to go!`)
+    return userInfo
+  } else {
+    console.log(`New user detected, adding them to the DB`)
+    await axios.post("https://dry-depths-80800.herokuapp.com/users", { user: user }, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(res => userInfo = res.data)
+    return userInfo
+  }
+}
+
 const embedColorPicker = (job) => {
   let role;
   for (const [key, value] of Object.entries(roles)) {
@@ -27,7 +61,7 @@ const embedColorPicker = (job) => {
     case `heals`:
       return `#005406`;
     default:
-      return `#540000`;
+      return `#87251e`;
   }
 };
 
@@ -152,7 +186,7 @@ const gearHandler = (job, slotIndex) => {
       default:
         break;
     }
-  // Questions for melee DPS
+    // Questions for melee DPS
   } else {
     if (mFilter === `Maiming` || mFilter === `Striking`) {
       aFilter = `Slaying`
@@ -217,12 +251,15 @@ const gearHandler = (job, slotIndex) => {
   }
   console.log(`option1:\n${option1}\noption2:\n${option2}`);
   // const options = [option1, option2]
-  return [ option1, option2 ]
+  return [option1, option2]
 };
+
+
 
 module.exports = {
   embedColorPicker,
   embedIconPicker,
   weaponPicker,
   gearHandler,
+  getUserInfo
 };
