@@ -51,12 +51,11 @@ module.exports = {
             console.log(interaction.values[0])
             let joB
             for (const set in sets) {
-                // console.log(sets[set][interaction.values[0]])
                 if (sets[set][interaction.values[0]]) {
                     joB = sets[set][interaction.values[0]]
                 }
             }
-            // console.log(joB)
+            console.log(joB)
             let counter = 0
 
             for (const set in userSets) {
@@ -77,6 +76,7 @@ module.exports = {
 
                 }
             }
+
             embed
                 .setColor(embedColorPicker(joB.value))
                 .setTitle(`${joB.label}`)
@@ -86,9 +86,14 @@ module.exports = {
                 })
                 .setDescription(`*Best in slot*`)
                 .setThumbnail(`${embedIconPicker(joB)}`);
+            dropdown.edit({
+                embeds: [embed],
+                components: []
+            })
         })
+
         collector.on(`end`, collected => {
             return
-        }) 
+        })
     }
 }
