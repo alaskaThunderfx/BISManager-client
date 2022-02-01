@@ -19,6 +19,7 @@ const axios = require(`axios`)
 
 const getUserInfo = async (message) => {
   const user = `${message.author.username}#${message.author.discriminator}`
+  const iconURL = `${message.author.avatarURL()}`
   const uDict = {}
   let userId
   let userInfo
@@ -40,11 +41,13 @@ const getUserInfo = async (message) => {
     return userInfo
   } else {
     console.log(`New user detected, adding them to the DB`)
-    await axios.post("https://dry-depths-80800.herokuapp.com/users", { user: user }, {
+    // "https://dry-depths-80800.herokuapp.com/users"
+    await axios.post("http://localhost:4741/users", { user: user, iconURL: iconURL }, {
       headers: {
         "Content-Type": "application/json",
       },
     }).then(res => userInfo = res.data)
+    console.log(userInfo)
     return userInfo
   }
 }

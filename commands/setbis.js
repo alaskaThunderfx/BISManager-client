@@ -53,7 +53,7 @@ module.exports = {
     );
 
     rollingMessage.delete()
-    await message.reply(`Hi there, ${message.member.displayName}! Please be patient as you click through my questions! I can be a bit slow sometimes, so be sure not to click more than one time per question!`);
+    await message.reply(`Hi there, ${message.member.displayName}! \n*Please be patient as you click through my questions! I can be a bit slow sometimes, so be sure not to click more than one time per question!*`);
     await message.channel
       .send({ embeds: [embed], components: [row] })
       .then((input) => (msg = input));
@@ -68,107 +68,107 @@ module.exports = {
     collector.on("collect", async (interaction) => {
       interaction.deferUpdate();
       // User selects job
-      try{
-      if (interaction.isSelectMenu()) {
-        // check if the job they selected already has a set in the database
-        job = jobjects.find((j) => j.value === interaction.values[0]);
-        if (existingSets.includes(job.value)) {
-          message.reply(`You already have a set for ${job.value.toUpperCase()}! Type !bismanager to see the list of options again if you would like to modify the ${job.value.toUpperCase()} set.`)
-          collector.stop()
-          return
-        }
-        // Begin building job/set display embed
-        embed
-          .setColor(embedColorPicker(job.value))
-          .setTitle(`${job.label}`)
-          .setAuthor({
-            name: `${message.member.displayName}`,
-            iconURL: `${message.author.avatarURL()}`,
-          })
-          .setDescription(`*Best in slot*`)
-          .setThumbnail(`${embedIconPicker(job)}`);
-        // Update dropdown message with embed
-        await msg.edit({
-          content: `Okay, great! Let's make a set for ${job.emoji}${job.label}!`,
-          components: [],
-          embeds: [embed],
-        });
-
-        // begin Weapon question, pass through job.value, slot
-        // somthing like raidButtonPicker(job.value, slot[slot])
-
-        for (const [key, value] of Object.entries(weapons)) {
-          if (key === job.value.toUpperCase()) {
-            option1 = value.raid;
-            option2 = value.tome;
+      try {
+        if (interaction.isSelectMenu()) {
+          // check if the job they selected already has a set in the database
+          job = jobjects.find((j) => j.value === interaction.values[0]);
+          if (existingSets.includes(job.value)) {
+            message.reply(`You already have a set for ${job.value.toUpperCase()}! Type !bismanager to see the list of options again if you would like to modify the ${job.value.toUpperCase()} set.`)
+            collector.stop()
+            return
           }
-        }
-        one = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option1}`)
-            .setLabel(`${option1}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        two = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option2}`)
-            .setLabel(`${option2}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        btnMsgs = await message.channel.send({
-          content: questions[qIndex],
-          components: [one, two],
-        });
-        // begin cycling through the questions with buttons
-      } else {
-        option1 = gearHandler(job.value, slotIndex)[0];
-        option2 = gearHandler(job.value, slotIndex)[1];
-
-        one = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option1}`)
-            .setLabel(`${option1}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        two = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setCustomId(`${option2}`)
-            .setLabel(`${option2}`)
-            .setStyle(`SECONDARY`)
-        );
-
-        embed.addField(
-          `${slot[slotIndex]}: `,
-          `${interaction.customId}`,
-          false
-        );
-
-        slotIndex++;
-        await btnMsgs.delete();
-        if (qIndex !== questions.length) {
+          // Begin building job/set display embed
+          embed
+            .setColor(embedColorPicker(job.value))
+            .setTitle(`${job.label}`)
+            .setAuthor({
+              name: `${message.member.displayName}`,
+              iconURL: `${message.author.avatarURL()}`,
+            })
+            .setDescription(`*Best in slot*`)
+            .setThumbnail(`${embedIconPicker(job)}`);
+          // Update dropdown message with embed
           await msg.edit({
-            embeds: [embed],
-          }).then(
-            btnMsgs = await message.channel
-              .send({
-                content: questions[qIndex],
-                components: [one, two],
-              }))
-            .catch(console.error)
-        } else {
-          await msg.edit({
+            content: `Okay, great! Let's make a set for ${job.emoji}${job.label}!`,
+            components: [],
             embeds: [embed],
           });
+
+          // begin Weapon question, pass through job.value, slot
+          // somthing like raidButtonPicker(job.value, slot[slot])
+
+          for (const [key, value] of Object.entries(weapons)) {
+            if (key === job.value.toUpperCase()) {
+              option1 = value.raid;
+              option2 = value.tome;
+            }
+          }
+          one = new MessageActionRow().addComponents(
+            new MessageButton()
+              .setCustomId(`${option1}`)
+              .setLabel(`${option1}`)
+              .setStyle(`SECONDARY`)
+          );
+
+          two = new MessageActionRow().addComponents(
+            new MessageButton()
+              .setCustomId(`${option2}`)
+              .setLabel(`${option2}`)
+              .setStyle(`SECONDARY`)
+          );
+
+          btnMsgs = await message.channel.send({
+            content: questions[qIndex],
+            components: [one, two],
+          });
+          // begin cycling through the questions with buttons
+        } else {
+          option1 = gearHandler(job.value, slotIndex)[0];
+          option2 = gearHandler(job.value, slotIndex)[1];
+
+          one = new MessageActionRow().addComponents(
+            new MessageButton()
+              .setCustomId(`${option1}`)
+              .setLabel(`${option1}`)
+              .setStyle(`SECONDARY`)
+          );
+
+          two = new MessageActionRow().addComponents(
+            new MessageButton()
+              .setCustomId(`${option2}`)
+              .setLabel(`${option2}`)
+              .setStyle(`SECONDARY`)
+          );
+
+          embed.addField(
+            `${slot[slotIndex]}: `,
+            `${interaction.customId}`,
+            false
+          );
+
+          slotIndex++;
+          await btnMsgs.delete();
+          if (qIndex !== questions.length) {
+            await msg.edit({
+              embeds: [embed],
+            }).then(
+              btnMsgs = await message.channel
+                .send({
+                  content: questions[qIndex],
+                  components: [one, two],
+                }))
+              .catch(console.error)
+          } else {
+            await msg.edit({
+              embeds: [embed],
+            });
+          }
         }
+        qIndex++;
+      } catch {
+        message.reply(`Oh no, something went wrong! You may have pressed a button more than once :(. Please try again, this set was not added.`)
+        collector.stop()
       }
-      qIndex++;
-    } catch {
-      message.reply(`Oh no, something went wrong! You may have pressed a button more than once :(. Please try again, this set was not added.`)
-      collector.stop()
-    }
     });
 
     collector.on(`end`, async (collected) => {
