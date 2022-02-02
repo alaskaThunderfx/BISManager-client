@@ -3,8 +3,10 @@ const {
     MessageActionRow,
     MessageSelectMenu,
     MessageEmbed,
-    MessageButton
+    MessageButton,
+    Message
 } = require("discord.js");
+const { options } = require("nodemon/lib/config");
 const { slot } = require(`../dataArrays`)
 const { getUserInfo, viewSetsHandler, embedColorPicker, embedIconPicker } = require(`../helperfunctions`)
 
@@ -12,6 +14,10 @@ module.exports = {
     name: `viewset`,
     description: `Allows the user to view the gear sets they've made.`,
     async execute(message, args) {
+        const items = []
+        const ids = []
+        let idObj = {}
+        let buttonRow
         let rollingMessage;
         await message
             .reply(
@@ -19,8 +25,9 @@ module.exports = {
             )
             .then((msg) => (rollingMessage = msg));
         const jobs = []
+        let joB
         const userInfo = await getUserInfo(message)
-
+        idObj[`userId`] = userInfo._id
 
         if (userInfo.gearSets.length === 0) {
             rollingMessage.delete()
@@ -52,14 +59,19 @@ module.exports = {
         const filter = (interaction) => interaction.user.id === message.author.id;
         const collector = message.channel.createMessageComponentCollector({
             filter,
-            max: 1
+            max: 2
         })
+
 
         collector.on(`collect`, async (interaction) => {
             interaction.deferUpdate()
+            const timer = function () {
+                collector.stop()
+            }
+            setTimeout(timer, 30000)
+
             try {
                 if (interaction.isSelectMenu()) {
-                    let joB
                     for (const set in sets) {
                         if (sets[set][interaction.values[0]]) {
                             joB = sets[set][interaction.values[0]]
@@ -69,8 +81,16 @@ module.exports = {
 
                     for (const set in userSets) {
                         if (userSets[set].job === joB.value) {
+                            idObj[`gersetId`] = userSets[set]._id
+                            ids.push(idObj)
                             for (const [key, value] of Object.entries(userSets[set])) {
                                 if (key !== `job` && counter !== 11) {
+                                    let obj = {}
+                                    obj[slot[counter]] = {
+                                        name: value.name,
+                                        doesHave: value.doesHave
+                                    }
+                                    items.push(obj)
                                     embed.addField(
                                         `${slot[counter]}`,
                                         `${value.doesHave ? `~~${value.name}~~` : `${value.name}`}`,
@@ -105,24 +125,58 @@ module.exports = {
                         )
                         .addComponents(
                             new MessageButton()
-                            .setCustomId(`Delete`)
-                            .setLabel(`Delete`)
-                            .setStyle(`DANGER`)
+                                .setCustomId(`Delete`)
+                                .setLabel(`Delete`)
+                                .setStyle(`DANGER`)
                         )
                         .addComponents(
                             new MessageButton()
-                            .setCustomId(`Finished`)
-                            .setLabel(`Finished`)
-                            .setStyle(`SECONDARY`)
+                                .setCustomId(`Finished`)
+                                .setLabel(`Finished`)
+                                .setStyle(`SECONDARY`)
                         )
-                    message.channel.send({ content: `*What would you like to do with this set?*`, components: [options]})
-                } else {
-
+                    await message.channel.send({ content: `*What would you like to do with this set?*`, components: [options] }).then(rply => buttonRow = rply)
                 }
+                return
             } catch { console.error }
         })
 
         collector.on(`end`, collected => {
+            console.log(ids)
+            let button
+            collected.forEach(item => {
+                if (!item.values) button = item.customId
+            })
+            switch (button) {
+                case 'Update':
+
+                    break
+                case `Delete`:
+                    const yesNoButtons = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setCustomId(`Yes`)
+                                .setLabel(`Yes`)
+                                .setStyle(`SUCCESS`))
+                        .addComponents(
+                            new MessageButton()
+                                .setCustomId(`No`)
+                                .setLabel(`No`)
+                                .setStyle(`DANGER`)
+                        )
+
+                    buttonRow.edit({
+                        content: `Are you sure you want to delete your ${joB.label} set?`,
+                        components: [yesNoButtons]
+                    })
+                    console.log(button)
+                    break
+                case `Finished`:
+                    console.log(button)
+                    break
+                default:
+                    break
+            }
             return
         })
     }

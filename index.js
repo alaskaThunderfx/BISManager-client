@@ -46,8 +46,14 @@ client.on("messageCreate", commandHandler);
 
 client.on("interactionCreate", async (interaction) => {
   // if (!interaction.isSelectMenu() || !interaction.isButton()) return;
-
-  console.log(`interaction.values in InteractionCreate:\n${interaction.values}`)
+  // const interactionUser = [interaction.user.username, interaction.user.discriminator]
+  // const messageUser = []
+  // console.log(interaction.message.author.id)
+  // console.log(interaction.user.id)
+  // console.log(interaction.message.id)
+  // console.log(interaction.id)
+  // console.log(interaction.author.id)
+  // interaction.values ? console.log(`interaction.values in interactionCreate:\n${interaction.values}`) : console.log(`interaction.customId in interactionCreate:\n${interaction.customId}`)
 });
 
 client.login(process.env.TOKEN);
