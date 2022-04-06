@@ -1,11 +1,12 @@
-const axios = require(`axios`)
+const { default: axios } = require(`axios`)
 const {
     MessageActionRow,
     MessageSelectMenu,
     MessageEmbed,
     MessageButton
 } = require(`discord.js`)
-const deleteSet = function (joB, buttonRow, message, userId, gearsetId) {
+const deleteSet = async function (joB, buttonRow, message, userId, gearsetId) {
+    console.log(userId, gearsetId)
     const yesNoButtons = new MessageActionRow()
         .addComponents(
             new MessageButton()
@@ -39,10 +40,18 @@ const deleteSet = function (joB, buttonRow, message, userId, gearsetId) {
     })
 
     collector.on(`end`, collected => {
+        let choice
         collected.forEach(item => {
-            console.log(item.customId)
-        })
+            choice = item.customId
+        });
+        if (choice === `Yes`) {
+            axios.delete(`http://localhost:4741/gearsets/${gearsetId}`, {
+                userId: userId
+            }).then(res => console.log(res.status))
+        }
     })
+
+
 }
 
 module.exports = {

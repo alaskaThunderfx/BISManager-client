@@ -82,7 +82,7 @@ module.exports = {
 
                     for (const set in userSets) {
                         if (userSets[set].job === joB.value) {
-                            idObj[`gersetId`] = userSets[set]._id
+                            idObj[`gearsetId`] = userSets[set]._id
                             ids.push(idObj)
                             for (const [key, value] of Object.entries(userSets[set])) {
                                 if (key !== `job` && counter !== 11) {
@@ -154,7 +154,7 @@ module.exports = {
                     break
                 case `Delete`:
                     console.log(`You're in Delete now!`)
-                    deleteSet(joB, buttonRow, message)
+                    deleteSet(joB, buttonRow, message, ids[0].userId, ids[0].gearsetId)
                     console.log(button)
                     break
                 case `Finished`:
