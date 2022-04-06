@@ -9,6 +9,7 @@ const {
 const { options } = require("nodemon/lib/config");
 const { slot } = require(`../dataArrays`)
 const { getUserInfo, viewSetsHandler, embedColorPicker, embedIconPicker } = require(`../helperfunctions`)
+const { deleteSet } = require(`./viewsetOptions/delete`)
 
 module.exports = {
     name: `viewset`,
@@ -149,26 +150,11 @@ module.exports = {
             })
             switch (button) {
                 case 'Update':
-
+                console.log(`You're in update now!`)
                     break
                 case `Delete`:
-                    const yesNoButtons = new MessageActionRow()
-                        .addComponents(
-                            new MessageButton()
-                                .setCustomId(`Yes`)
-                                .setLabel(`Yes`)
-                                .setStyle(`SUCCESS`))
-                        .addComponents(
-                            new MessageButton()
-                                .setCustomId(`No`)
-                                .setLabel(`No`)
-                                .setStyle(`DANGER`)
-                        )
-
-                    buttonRow.edit({
-                        content: `Are you sure you want to delete your ${joB.label} set?`,
-                        components: [yesNoButtons]
-                    })
+                    console.log(`You're in Delete now!`)
+                    deleteSet(joB, buttonRow)
                     console.log(button)
                     break
                 case `Finished`:
