@@ -154,11 +154,15 @@ module.exports = {
                     break
                 case `Delete`:
                     console.log(`You're in Delete now!`)
-                    deleteSet(joB, buttonRow)
+                    deleteSet(joB, buttonRow, message)
                     console.log(button)
                     break
                 case `Finished`:
                     console.log(button)
+                    buttonRow.edit({
+                        content: `*All done! Thank you!*`,
+                        components: []
+                    })
                     break
                 default:
                     break
