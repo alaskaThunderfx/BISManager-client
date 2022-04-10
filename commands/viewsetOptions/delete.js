@@ -43,11 +43,16 @@ const deleteSet = async function (joB, buttonRow, message, userId, gearsetId) {
         let choice
         collected.forEach(item => {
             choice = item.customId
+            console.log(choice)
         });
         if (choice === `Yes`) {
-            axios.delete(`http://localhost:4741/gearsets/${gearsetId}`, {
-                userId: userId
-            }).then(res => console.log(res.status))
+            console.log(`doing api call`)
+            axios.delete(`http://localhost:4741/gearsets/${gearsetId}`,
+                {
+                    data: {
+                        userId: userId
+                    }
+                }).then(res => console.log(res.status))
         }
     })
 
