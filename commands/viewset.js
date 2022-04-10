@@ -10,6 +10,7 @@ const { options } = require("nodemon/lib/config");
 const { slot } = require(`../dataArrays`)
 const { getUserInfo, viewSetsHandler, embedColorPicker, embedIconPicker } = require(`../helperfunctions`)
 const { deleteSet } = require(`./viewsetOptions/delete`)
+const { updateSet } = require(`./viewsetOptions/update`)
 
 module.exports = {
     name: `viewset`,
@@ -150,7 +151,9 @@ module.exports = {
             })
             switch (button) {
                 case 'Update':
-                console.log(`You're in update now!`)
+                    console.log(`You're in update now!`)
+                    updateSet(buttonRow, message)
+                    console.log(button)
                     break
                 case `Delete`:
                     console.log(`You're in Delete now!`)
